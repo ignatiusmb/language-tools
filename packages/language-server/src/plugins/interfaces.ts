@@ -134,7 +134,7 @@ export interface SignatureHelpProvider {
         document: Document,
         position: Position,
         context: SignatureHelpContext | undefined
-    ): Resolvable<SignatureHelp | null>
+    ): Resolvable<SignatureHelp | null>;
 }
 
 export interface SelectionRangeProvider {

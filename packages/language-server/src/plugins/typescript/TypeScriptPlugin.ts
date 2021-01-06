@@ -95,11 +95,7 @@ export class TypeScriptPlugin
         workspaceUris: string[]
     ) {
         this.configManager = configManager;
-        this.lsAndTsDocResolver = new LSAndTSDocResolver(
-            docManager,
-            workspaceUris,
-            configManager
-        );
+        this.lsAndTsDocResolver = new LSAndTSDocResolver(docManager, workspaceUris, configManager);
         this.completionProvider = new CompletionsProviderImpl(this.lsAndTsDocResolver);
         this.codeActionsProvider = new CodeActionsProviderImpl(
             this.lsAndTsDocResolver,
@@ -392,7 +388,9 @@ export class TypeScriptPlugin
     }
 
     async getSignatureHelp(
-        document: Document, position: Position, context: SignatureHelpContext | undefined
+        document: Document,
+        position: Position,
+        context: SignatureHelpContext | undefined
     ): Promise<SignatureHelp | null> {
         if (!this.featureEnabled('signatureHelp')) {
             return null;
