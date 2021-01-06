@@ -9,42 +9,42 @@ import { LSAndTSDocResolver } from '../LSAndTSDocResolver';
  * return the snapshot of that component.
  */
 export function getComponentAtPosition(
-    lsAndTsDocResovler: LSAndTSDocResolver,
-    lang: ts.LanguageService,
-    doc: Document,
-    tsDoc: SvelteDocumentSnapshot,
-    fragment: SvelteSnapshotFragment,
-    originalPosition: Position
+	lsAndTsDocResovler: LSAndTSDocResolver,
+	lang: ts.LanguageService,
+	doc: Document,
+	tsDoc: SvelteDocumentSnapshot,
+	fragment: SvelteSnapshotFragment,
+	originalPosition: Position
 ): SvelteDocumentSnapshot | null {
-    if (tsDoc.parserError) {
-        return null;
-    }
+	if (tsDoc.parserError) {
+		return null;
+	}
 
-    if (
-        isInTag(originalPosition, doc.scriptInfo) ||
-        isInTag(originalPosition, doc.moduleScriptInfo)
-    ) {
-        // Inside script tags -> not a component
-        return null;
-    }
+	if (
+		isInTag(originalPosition, doc.scriptInfo) ||
+		isInTag(originalPosition, doc.moduleScriptInfo)
+	) {
+		// Inside script tags -> not a component
+		return null;
+	}
 
-    const node = getNodeIfIsInComponentStartTag(doc.html, doc.offsetAt(originalPosition));
-    if (!node) {
-        return null;
-    }
+	const node = getNodeIfIsInComponentStartTag(doc.html, doc.offsetAt(originalPosition));
+	if (!node) {
+		return null;
+	}
 
-    const generatedPosition = fragment.getGeneratedPosition(doc.positionAt(node.start + 1));
-    const def = lang.getDefinitionAtPosition(
-        tsDoc.filePath,
-        fragment.offsetAt(generatedPosition)
-    )?.[0];
-    if (!def) {
-        return null;
-    }
+	const generatedPosition = fragment.getGeneratedPosition(doc.positionAt(node.start + 1));
+	const def = lang.getDefinitionAtPosition(
+		tsDoc.filePath,
+		fragment.offsetAt(generatedPosition)
+	)?.[0];
+	if (!def) {
+		return null;
+	}
 
-    const snapshot = lsAndTsDocResovler.getSnapshot(def.fileName);
-    if (!(snapshot instanceof SvelteDocumentSnapshot)) {
-        return null;
-    }
-    return snapshot;
+	const snapshot = lsAndTsDocResovler.getSnapshot(def.fileName);
+	if (!(snapshot instanceof SvelteDocumentSnapshot)) {
+		return null;
+	}
+	return snapshot;
 }

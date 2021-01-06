@@ -1,20 +1,20 @@
 export class Scope {
-    declared: Set<string> = new Set();
-    parent: Scope;
+	declared: Set<string> = new Set();
+	parent: Scope;
 
-    constructor(parent?: Scope) {
-        this.parent = parent;
-    }
+	constructor(parent?: Scope) {
+		this.parent = parent;
+	}
 }
 
 export class ScopeStack {
-    current = new Scope();
+	current = new Scope();
 
-    push() {
-        this.current = new Scope(this.current);
-    }
+	push() {
+		this.current = new Scope(this.current);
+	}
 
-    pop() {
-        this.current = this.current.parent;
-    }
+	pop() {
+		this.current = this.current.parent;
+	}
 }

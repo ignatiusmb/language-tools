@@ -6,36 +6,36 @@ import del from 'rollup-plugin-delete';
 import builtins from 'builtin-modules';
 
 export default [
-    {
-        input: ['src/index.ts'],
-        output: {
-            sourcemap: true,
-            format: 'commonjs',
-            file: 'test/build/index.js'
-        },
-        plugins: [
-            del({ targets: 'test/build/index.*' }),
-            resolve({ browser: false, preferBuiltins: true }),
-            commonjs(),
-            json(),
-            typescript({ include: ['src/**/*'] })
-        ],
-        external: [...builtins, 'typescript', 'svelte', 'svelte/compiler', 'magic-string']
-    },
-    {
-        input: ['src/htmlxtojsx/index.ts'],
-        output: {
-            sourcemap: true,
-            format: 'commonjs',
-            file: 'test/build/htmlxtojsx.js'
-        },
-        plugins: [
-            del({ targets: 'test/build/htmlxtojsx.*' }),
-            resolve({ browser: false, preferBuiltins: true }),
-            commonjs(),
-            json(),
-            typescript({ include: ['src/**/*'] })
-        ],
-        external: [...builtins, 'typescript', 'svelte', 'svelte/compiler', 'magic-string']
-    }
+	{
+		input: ['src/index.ts'],
+		output: {
+			sourcemap: true,
+			format: 'commonjs',
+			file: 'test/build/index.js'
+		},
+		plugins: [
+			del({ targets: 'test/build/index.*' }),
+			resolve({ browser: false, preferBuiltins: true }),
+			commonjs(),
+			json(),
+			typescript({ include: ['src/**/*'] })
+		],
+		external: [...builtins, 'typescript', 'svelte', 'svelte/compiler', 'magic-string']
+	},
+	{
+		input: ['src/htmlxtojsx/index.ts'],
+		output: {
+			sourcemap: true,
+			format: 'commonjs',
+			file: 'test/build/htmlxtojsx.js'
+		},
+		plugins: [
+			del({ targets: 'test/build/htmlxtojsx.*' }),
+			resolve({ browser: false, preferBuiltins: true }),
+			commonjs(),
+			json(),
+			typescript({ include: ['src/**/*'] })
+		],
+		external: [...builtins, 'typescript', 'svelte', 'svelte/compiler', 'magic-string']
+	}
 ];
